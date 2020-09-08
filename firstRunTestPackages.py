@@ -13,8 +13,9 @@ for ticker in allTickers:
 	#allFileURLs = SECURLScraper.getDownloadURLs(CIK)
 	#pd.DataFrame(allFileURLs).to_csv('fileURLs.csv')
 	allFileURLs = list((pd.read_csv('fileURLs.csv')).iloc[:,-1])
-	fullDF = URLsToDataFrame.getFinancialFilingsFromURLs(allFileURLs)
-	print(fullDF.head(5))
+	annualDF, quarterlyDF = URLsToDataFrame.getFinancialFilingsFromURLs(allFileURLs)
+	annualDF.to_csv('BE-annual.csv')
+	quarterlyDF.to_csv('BE-quarterly.csv')
 
 '''
 need to first construct the get columns method such that when parsing the first sheet 
